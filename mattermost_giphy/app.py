@@ -3,10 +3,10 @@ import logging
 import os
 import sys
 import json
-'''from urlparse import urlsplit
-from urlparse import urlunsplit'''
-from urllib import urlsplit
-from urllib import urlunsplit
+from urlparse import urlsplit
+from urlparse import urlunsplit
+'''from urllib import urlsplit
+from urllib import urlunsplit'''
 
 import requests
 from flask import Flask
