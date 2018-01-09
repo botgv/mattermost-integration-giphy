@@ -5,6 +5,7 @@ import sys
 import json
 from urlparse import urlsplit
 from urlparse import urlunsplit
+from urllib import parse
 '''from urllib import urlsplit
 from urllib import urlunsplit'''
 
@@ -29,6 +30,9 @@ def root():
 
     return "OK"
 
+@app.route('/redirect/<url>')
+def images_redirect(url):
+    return redirect(parse.unquote_plus(url), code=302)
 
 @app.route('/new_post', methods=['POST'])
 def new_post():
@@ -67,7 +71,7 @@ def new_post():
             raise Exception('No gif url found for `{}`'.format(translate_text))
 
         resp_data['text'] = '''`{}` searched for {}
-    {}'''.format(data.get('user_name', 'unknown').title(), translate_text, gif_url)
+    {}images/{}'''.format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, parse.quote_plus(gif_url))
     except Exception as err:
         msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))
