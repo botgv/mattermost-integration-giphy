@@ -3,10 +3,10 @@ import logging
 import os
 import sys
 import json
-import urllib
 from urlparse import urlsplit
 from urlparse import urlunsplit
-#from urllib import parse
+from urllib import quote_plus
+from urllib import unquote_plus
 '''from urllib import urlsplit
 from urllib import urlunsplit'''
 
@@ -33,7 +33,7 @@ def root():
 
 @app.route('/redirect/<url>')
 def images_redirect(url):
-    return redirect(urllib.parse.unquote_plus(url), code=302)
+    return redirect(unquote_plus(url), code=302)
 
 @app.route('/new_post', methods=['POST'])
 def new_post():
@@ -72,7 +72,7 @@ def new_post():
             raise Exception('No gif url found for `{}`'.format(translate_text))
 
         resp_data['text'] = '''`{}` searched for {}
-    {}redirect/{}'''.format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, urllib.parse.quote_plus(gif_url))
+    {}redirect/{}'''.format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, quote_plus(gif_url))
     except Exception as err:
         msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))
