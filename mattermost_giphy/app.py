@@ -81,7 +81,6 @@ def new_post():
 
         resp_data['text'] = '''`{}` searched for {}
     {}redirect/{}'''.format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, base64.encodestring(gif_url))
-		resp_data['text'] = resp_data['text']  + '.gif'
     except Exception as err:
         msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))
