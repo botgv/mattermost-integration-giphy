@@ -7,6 +7,7 @@ from urlparse import urlsplit
 from urlparse import urlunsplit
 from urllib import quote_plus
 from urllib import unquote_plus
+import base64
 '''from urllib import urlsplit
 from urllib import urlunsplit'''
 
@@ -35,7 +36,8 @@ def root():
 
 @app.route('/redirect/<url>')
 def images_redirect(image_url):
-	r = requests.get(image_url)
+	r = requests.get(base64.decodestring(image_url))
+	app.logger.info(response.headers)
 	buffer_image = StringIO(r.content)
 	buffer_image.seek(0)
 	return send_file(buffer_image, mimetype='image/gif')
@@ -77,7 +79,7 @@ def new_post():
             raise Exception('No gif url found for `{}`'.format(translate_text))
 
         resp_data['text'] = '''`{}` searched for {}
-    {}redirect/{}'''.format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, quote_plus(gif_url))
+    {}redirect/{}'''.format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, base64.encodestring(gif_url))
     except Exception as err:
         msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))
