@@ -37,7 +37,7 @@ def root():
 @app.route('/redirect/<image_url>')
 def images_redirect(image_url):
 	r = requests.get(base64.decodestring(image_url))
-	app.logger.info(response.headers)
+	app.logger.info(r.headers)
 	buffer_image = StringIO(r.content)
 	buffer_image.seek(0)
 	return send_file(buffer_image, mimetype='image/gif')
