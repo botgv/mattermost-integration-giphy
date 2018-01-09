@@ -86,7 +86,6 @@ def new_post():
         logging.error('unable to handle new post :: {}'.format(msg))
         resp_data['text'] = msg
     finally:
-		app.logger.info(resp_data['text'])
         resp = Response(content_type='application/json')
         resp.set_data(json.dumps(resp_data))
         return resp
