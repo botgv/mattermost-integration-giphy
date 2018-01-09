@@ -80,7 +80,8 @@ def new_post():
             raise Exception('No gif url found for `{}`'.format(translate_text))
 
         resp_data['text'] = '''`{}` searched for {}
-    {}redirect/{}.{}'''.format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, base64.encodestring(gif_url), 'gif')
+    {}redirect/{}'''.format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, base64.encodestring(gif_url))
+		resp_data['text'] = resp_data['text']  + '.gif'
     except Exception as err:
         msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))
@@ -88,7 +89,6 @@ def new_post():
     finally:
         resp = Response(content_type='application/json')
         resp.set_data(json.dumps(resp_data))
-		app.logger.info(resp_data['text'])
         return resp
 
 
