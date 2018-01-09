@@ -14,6 +14,8 @@ import requests
 from flask import Flask
 from flask import request
 from flask import Response
+from flask import send_file
+from StringIO import StringIO
 
 from mattermost_giphy.settings import *
 
@@ -32,8 +34,11 @@ def root():
     return "OK"
 
 @app.route('/redirect/<url>')
-def images_redirect(url):
-    return redirect(unquote_plus(url), code=302)
+def images_redirect(image_url):
+	r = requests.get(image_url)
+	buffer_image = StringIO(r.content)
+	buffer_image.seek(0)
+	return send_file(buffer_image, mimetype='image/gif')
 
 @app.route('/new_post', methods=['POST'])
 def new_post():
