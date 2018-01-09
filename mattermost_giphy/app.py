@@ -81,12 +81,12 @@ def new_post():
 
         resp_data['text'] = '''`{}` searched for {}
     {}redirect/{}.{}'''.format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, base64.encodestring(gif_url), 'gif')
-		app.logger.info(resp_data['text'])
     except Exception as err:
         msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))
         resp_data['text'] = msg
     finally:
+		app.logger.info(resp_data['text'])
         resp = Response(content_type='application/json')
         resp.set_data(json.dumps(resp_data))
         return resp
