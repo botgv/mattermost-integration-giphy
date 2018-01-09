@@ -34,7 +34,7 @@ def root():
 
     return "OK"
 
-@app.route('/redirect/<url>')
+@app.route('/redirect/<image_url>')
 def images_redirect(image_url):
 	r = requests.get(base64.decodestring(image_url))
 	app.logger.info(response.headers)
