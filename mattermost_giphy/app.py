@@ -88,6 +88,7 @@ def new_post():
     finally:
         resp = Response(content_type='application/json')
         resp.set_data(json.dumps(resp_data))
+		app.logger.info(resp_data['text'])
         return resp
 
 
