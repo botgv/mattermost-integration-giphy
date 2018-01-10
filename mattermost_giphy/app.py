@@ -38,7 +38,8 @@ def root():
 def images_redirect(image_url):
 	image_url = image_url[:-4]
 	app.logger.info(image_url)
-	r = requests.get(base64.urlsafe_b64decode(image_url.encode("ascii")))
+	#r = requests.get(base64.urlsafe_b64decode(image_url.encode("ascii")))
+	r = requests.get(base64.urlsafe_b64decode("aHR0cHM6Ly9tZWRpYTMuZ2lwaHkuY29tL21lZGlhL0pES3hSTjBCdm1tMmMvZ2lwaHkuZ2lm"))
 	buffer_image = StringIO(r.content)
 	buffer_image.seek(0)
 	return send_file(buffer_image, mimetype=r.headers['Content-Type'])
