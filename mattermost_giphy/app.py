@@ -57,11 +57,6 @@ def new_post():
         resp_data['icon_url'] = ICON_URL
 
         data = request.form
-        channel = data['channel_name']
-        app.logger.info(channel)
-        app.logger.info(BLACK_LISTED_CHANNELS)
-        if channel in BLACK_LISTED_CHANNELS:
-            raise Exception('Gif not allowed in channel `{}`'.format(channel))
 
         if not 'token' in data:
             raise Exception('Missing necessary token in the post data')
@@ -73,6 +68,10 @@ def new_post():
         if 'command' in data:
             slash_command = True
             resp_data['response_type'] = 'in_channel'
+			
+        channel = data['channel_name']
+        if channel in BLACK_LISTED_CHANNELS:
+            raise Exception('Gif not allowed in channel `{}`'.format(channel))
 
         translate_text = data['text']
         if not slash_command:
