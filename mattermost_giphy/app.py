@@ -57,7 +57,7 @@ def new_post():
         resp_data['icon_url'] = ICON_URL
 
         data['text'] = request.form
-		
+		app.logger.info(data)
         channel = data['channel_name']
         if channel not in BLACK_LISTED_CHANNELS:
             raise Exception('Gif not allowed in channel `{}`'.format(channel))
