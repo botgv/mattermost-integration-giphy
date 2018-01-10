@@ -60,7 +60,7 @@ def new_post():
         channel = data['channel_name']
         app.logger.info(channel)
         app.logger.info(BLACK_LISTED_CHANNELS)
-        if channel not in BLACK_LISTED_CHANNELS:
+        if channel in BLACK_LISTED_CHANNELS:
             raise Exception('Gif not allowed in channel `{}`'.format(channel))
 
         if not 'token' in data:
