@@ -37,7 +37,7 @@ def root():
 @app.route('/redirect/<image_url>')
 def images_redirect(image_url):
 	image_url = image_url[:-4]
-	r = requests.get(base64.decodestring(image_url))
+	r = requests.get(base64.urlsafe_b64decode(image_url))
 	#app.logger.info(r.headers)
 	buffer_image = StringIO(r.content)
 	buffer_image.seek(0)
@@ -79,7 +79,7 @@ def new_post():
         if not gif_url:
             raise Exception('No gif url found for `{}`'.format(translate_text))
 
-        resp_data['text'] = "`{}` searched for {}\r\n    {}redirect/{}.gif".format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, base64.encodestring(gif_url))
+        resp_data['text'] = "`{}` searched for {}\r\n    {}redirect/{}.gif".format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, base64.urlsafe_b64encode(gif_url))
         app.logger.info(resp_data['text'])
     except Exception as err:
         msg = err.message
