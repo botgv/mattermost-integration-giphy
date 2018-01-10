@@ -71,7 +71,7 @@ def new_post():
 			
         channel = data['channel_name']
         if channel in BLACK_LISTED_CHANNELS:
-            raise Exception('Gif not allowed in channel `{}`'.format(channel))
+            raise Exception(':trollface: Gif not allowed in ~~{}~~'.format(channel))
 
         translate_text = data['text']
         if not slash_command:
