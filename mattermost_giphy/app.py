@@ -71,7 +71,7 @@ def new_post():
 			
         channel = data['channel_name']
         if channel in BLACK_LISTED_CHANNELS:
-            raise Exception(':trollface: Gif not allowed in ~~{}~~'.format(channel))
+            raise Exception(':trollface: Pierre says "no gif in ~~{}~~"'.format(channel))
 
         translate_text = data['text']
         if not slash_command:
@@ -84,8 +84,8 @@ def new_post():
         if not gif_url:
             raise Exception('No gif url found for `{}`'.format(translate_text))
 
-        resp_data['text'] = "`{}` searched for {}\r\n    {}redirect/{}.gif".format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, base64.urlsafe_b64encode(gif_url))
-        app.logger.info(resp_data['text'])
+        app.logger.info(gif_url)
+        resp_data['text'] = "`{}` searched for {}\r\n    {}redirect/{}.mp4".format(data.get('user_name', 'unknown').title(), translate_text, request.host_url, base64.urlsafe_b64encode(gif_url))
     except Exception as err:
         msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))
@@ -115,7 +115,7 @@ def giphy_translate(text):
 
         resp_data = resp.json()
 
-        url = list(urlsplit(resp_data['data']['images']['original']['url']))
+        url = list(urlsplit(resp_data['data']['images']['fixed_height']['mp4']))
         url[0] = SCHEME.lower()
 
         return urlunsplit(url)
