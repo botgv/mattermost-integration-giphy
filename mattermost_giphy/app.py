@@ -58,8 +58,9 @@ def new_post():
 
         data['text'] = request.form
 		
-        if data['channel_name'] not in BLACK_LISTED_CHANNELS:
-            raise Exception('Gif not allowed in channel `{}`'.format(data['channel_name']))
+        channel = data['channel_name']
+        if channel not in BLACK_LISTED_CHANNELS:
+            raise Exception('Gif not allowed in channel `{}`'.format(channel))
 
         if not 'token' in data:
             raise Exception('Missing necessary token in the post data')
