@@ -19,3 +19,5 @@ GIPHY_API_KEY = os.environ.get('GIPHY_API_KEY', 'dc6zaTOxFJmzC')
 # the Mattermost token or tokens generated when you created your outgoing webhook
 # multiple tokens needs to be separated by a colon
 MATTERMOST_GIPHY_TOKEN = os.environ.get('MATTERMOST_GIPHY_TOKEN', '').split(':')
+
+BLACK_LISTED_CHANNELS = ['ldev-git--infra','ldev','documentation-projets','me']
