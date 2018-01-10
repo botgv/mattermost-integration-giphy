@@ -58,8 +58,8 @@ def new_post():
 
         data = request.form
         channel = data['channel_name']
-		app.logger.info(channel)
-		app.logger.info(BLACK_LISTED_CHANNELS)
+        app.logger.info(channel)
+        app.logger.info(BLACK_LISTED_CHANNELS)
         if channel not in BLACK_LISTED_CHANNELS:
             raise Exception('Gif not allowed in channel `{}`'.format(channel))
 
