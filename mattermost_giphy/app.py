@@ -44,7 +44,7 @@ def images_redirect(image_url):
 	buffer_image.seek(0)
 	return send_file(buffer_image, mimetype=r.headers['Content-Type'])
 	
-@app.route('/redirect/<image_url>')
+@app.route('/test/<image_url>')
 def test(image_url):
 	image_url = image_url[:-4]
 	app.logger.info(image_url)
