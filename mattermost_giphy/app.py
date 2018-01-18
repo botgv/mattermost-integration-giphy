@@ -80,10 +80,10 @@ def new_post():
             resp_data['response_type'] = 'in_channel'
 			
         channel = data['channel_name']
-        if channel in BLACK_LISTED_CHANNELS:
+        if channel in settings.BLACK_LISTED_CHANNELS:
             raise Exception(':trollface: Pierre says "no gif in ~~{}~~"'.format(channel))
 			
-        if RATING_PER_CHANNELS.has_key(channel):
+        if settings.RATING_PER_CHANNELS.has_key(channel):
             settings.RATING = settings.RATING_PER_CHANNELS.get(channel)
 			
         translate_text = data['text']
