@@ -80,10 +80,12 @@ def new_post():
             resp_data['response_type'] = 'in_channel'
 			
         channel = data['channel_name']
-        app.logger.info(channel)
         if channel in BLACK_LISTED_CHANNELS:
             raise Exception(':trollface: Pierre says "no gif in ~~{}~~"'.format(channel))
-
+			
+        if RATING_PER_CHANNELS.has_key(channel)
+            mattermost_giphy.settings.RATING = RATING_PER_CHANNELS.get(channel)
+			
         translate_text = data['text']
         if not slash_command:
             translate_text = data['text'][len(data['trigger_word']):]
@@ -117,6 +119,9 @@ def giphy_translate(text):
         params['s'] = text
         params['rating'] = RATING
         params['api_key'] = GIPHY_API_KEY
+		
+		
+        app.logger.info(RATING)
 
         resp = requests.get('{}://api.giphy.com/v1/gifs/translate'.format(SCHEME), params=params, verify=True)
 

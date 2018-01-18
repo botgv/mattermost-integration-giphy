@@ -8,7 +8,7 @@ USERNAME = os.environ.get('USERNAME', 'giphy')
 ICON_URL = os.environ.get('ICON_URL', 'https://avatars0.githubusercontent.com/u/3588525?v=3&s=200')
 
 # the maximum parental rating of gifs posted
-RATING = os.environ.get('RATING', 'nc-17')
+RATING = os.environ.get('RATING', 'pg-13')
 
 # scheme to be used for the gif url return to mattermost
 SCHEME = os.environ.get('SCHEME', 'https')
@@ -21,3 +21,5 @@ GIPHY_API_KEY = os.environ.get('GIPHY_API_KEY', 'dc6zaTOxFJmzC')
 MATTERMOST_GIPHY_TOKEN = os.environ.get('MATTERMOST_GIPHY_TOKEN', '').split(':')
 
 BLACK_LISTED_CHANNELS = ['ldev-git--infra','ldev','documentation-projets','red-is-dev-redmine']
+
+RATING_PER_CHANNELS = {"me":"r"}
