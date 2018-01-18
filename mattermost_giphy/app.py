@@ -125,7 +125,7 @@ def giphy_translate(text):
 
         resp_data = resp.json()
 
-        url = list(urlsplit(resp_data['data']['images']['fixed_width']['url']))
+        url = list(urlsplit(resp_data['data']['images']['fixed_height']['url']))
         url[0] = SCHEME.lower()
 
         return urlunsplit(url)
