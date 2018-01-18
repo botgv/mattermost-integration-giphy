@@ -38,8 +38,8 @@ def root():
 def images_redirect(image_url):
 	image_url = image_url[:-4]
 	app.logger.info(image_url)
-	#r = requests.get(base64.urlsafe_b64decode(image_url.encode("ascii")))
-	r = requests.get(base64.urlsafe_b64decode("aHR0cHM6Ly9tZWRpYTMuZ2lwaHkuY29tL21lZGlhL0pES3hSTjBCdm1tMmMvZ2lwaHkuZ2lm"))
+	r = requests.get(base64.urlsafe_b64decode(image_url.encode("ascii")))
+	#r = requests.get(base64.urlsafe_b64decode("aHR0cHM6Ly9tZWRpYTMuZ2lwaHkuY29tL21lZGlhL0pES3hSTjBCdm1tMmMvZ2lwaHkuZ2lm"))
 	buffer_image = StringIO(r.content)
 	buffer_image.seek(0)
 	return send_file(buffer_image, mimetype=r.headers['Content-Type'])
@@ -83,10 +83,8 @@ def new_post():
         if channel in settings.BLACK_LISTED_CHANNELS:
             raise Exception(':trollface: Pierre says "no gif in ~~{}~~"'.format(channel))
 			
-        app.logger.info(settings.RATING)
         if settings.RATING_PER_CHANNELS.has_key(channel):
             settings.RATING = settings.RATING_PER_CHANNELS.get(channel)
-            app.logger.info(channel)
         else:
             settings.RATING = 'pg-13'
 			
@@ -123,9 +121,6 @@ def giphy_translate(text):
         params['s'] = text
         params['rating'] = settings.RATING
         params['api_key'] = settings.GIPHY_API_KEY
-		
-		
-        app.logger.info(settings.RATING)
 
         resp = requests.get('{}://api.giphy.com/v1/gifs/translate'.format(settings.SCHEME), params=params, verify=True)
 

@@ -22,4 +22,4 @@ MATTERMOST_GIPHY_TOKEN = os.environ.get('MATTERMOST_GIPHY_TOKEN', '').split(':')
 
 BLACK_LISTED_CHANNELS = ['ldev-git--infra','ldev','documentation-projets','red-is-dev-redmine']
 
-RATING_PER_CHANNELS = {"me":"r"}
+RATING_PER_CHANNELS = {"me":"r","pose":"r","wtf":"r"}
