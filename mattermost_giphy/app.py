@@ -80,7 +80,7 @@ def new_post():
             resp_data['response_type'] = 'in_channel'
 			
         channel = data['channel_name']
-        app.logger.info(gif_url)
+        app.logger.info(channel)
         if channel in BLACK_LISTED_CHANNELS:
             raise Exception(':trollface: Pierre says "no gif in ~~{}~~"'.format(channel))
 
