@@ -83,7 +83,7 @@ def new_post():
         if channel in BLACK_LISTED_CHANNELS:
             raise Exception(':trollface: Pierre says "no gif in ~~{}~~"'.format(channel))
 			
-        if RATING_PER_CHANNELS.has_key(channel)
+        if RATING_PER_CHANNELS.has_key(channel):
             mattermost_giphy.settings.RATING = RATING_PER_CHANNELS.get(channel)
 			
         translate_text = data['text']
