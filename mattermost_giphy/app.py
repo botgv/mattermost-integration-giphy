@@ -104,6 +104,7 @@ def new_post():
     except Exception as err:
         msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))
+        resp_data['response_type'] = 'ephemeral'
         resp_data['text'] = msg
     finally:
         resp = Response(content_type='application/json')
