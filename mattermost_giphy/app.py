@@ -87,6 +87,8 @@ def new_post():
         if settings.RATING_PER_CHANNELS.has_key(channel):
             settings.RATING = settings.RATING_PER_CHANNELS.get(channel)
             app.logger.info(channel)
+        else:
+            settings.RATING = 'pg-13'
 			
         translate_text = data['text']
         if not slash_command:
