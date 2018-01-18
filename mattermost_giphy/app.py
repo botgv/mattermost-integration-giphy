@@ -18,7 +18,7 @@ from flask import Response
 from flask import send_file
 from StringIO import StringIO
 
-from mattermost_giphy.settings import *
+from mattermost_giphy import settings
 
 
 logging.basicConfig(
@@ -63,15 +63,15 @@ def new_post():
         # NOTE: common stuff
         slash_command = False
         resp_data = {}
-        resp_data['username'] = USERNAME
-        resp_data['icon_url'] = ICON_URL
+        resp_data['username'] = settings.USERNAME
+        resp_data['icon_url'] = settings.ICON_URL
 
         data = request.form
 
         if not 'token' in data:
             raise Exception('Missing necessary token in the post data')
 
-        if data['token'] not in MATTERMOST_GIPHY_TOKEN:
+        if data['token'] not in settings.MATTERMOST_GIPHY_TOKEN:
             raise Exception('Tokens did not match, it is possible that this request came from somewhere other than Mattermost')
 
         # NOTE: support the slash command
@@ -84,7 +84,7 @@ def new_post():
             raise Exception(':trollface: Pierre says "no gif in ~~{}~~"'.format(channel))
 			
         if RATING_PER_CHANNELS.has_key(channel):
-            mattermost_giphy.settings.RATING = RATING_PER_CHANNELS.get(channel)
+            settings.RATING = settings.RATING_PER_CHANNELS.get(channel)
 			
         translate_text = data['text']
         if not slash_command:
@@ -117,13 +117,13 @@ def giphy_translate(text):
     try:
         params = {}
         params['s'] = text
-        params['rating'] = RATING
-        params['api_key'] = GIPHY_API_KEY
+        params['rating'] = settings.RATING
+        params['api_key'] = settings.GIPHY_API_KEY
 		
 		
-        app.logger.info(RATING)
+        app.logger.info(settings.RATING)
 
-        resp = requests.get('{}://api.giphy.com/v1/gifs/translate'.format(SCHEME), params=params, verify=True)
+        resp = requests.get('{}://api.giphy.com/v1/gifs/translate'.format(settings.SCHEME), params=params, verify=True)
 
         if resp.status_code is not requests.codes.ok:
             logging.error('Encountered error using Giphy API, text=%s, status=%d, response_body=%s' % (text, resp.status_code, resp.json()))
