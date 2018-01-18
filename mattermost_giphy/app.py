@@ -83,8 +83,10 @@ def new_post():
         if channel in settings.BLACK_LISTED_CHANNELS:
             raise Exception(':trollface: Pierre says "no gif in ~~{}~~"'.format(channel))
 			
+        app.logger.info(settings.RATING)
         if settings.RATING_PER_CHANNELS.has_key(channel):
             settings.RATING = settings.RATING_PER_CHANNELS.get(channel)
+            app.logger.info(channel)
 			
         translate_text = data['text']
         if not slash_command:
