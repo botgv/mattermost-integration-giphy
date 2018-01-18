@@ -132,7 +132,7 @@ def giphy_translate(text):
         resp_data = resp.json()
 
         url = list(urlsplit(resp_data['data']['images']['downsized']['url']))
-        url[0] = SCHEME.lower()
+        url[0] = settings.SCHEME.lower()
 
         return urlunsplit(url)
     except Exception as err:
